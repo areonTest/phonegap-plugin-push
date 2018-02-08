@@ -130,7 +130,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
                 JSONObject localeObject = new JSONObject(value);
 
                 String localeKey = localeObject.getString(LOC_KEY);
-                
+
                 ArrayList<String> localeFormatData = new ArrayList<String>();
                 if (!localeObject.isNull(LOC_DATA)) {
                     String localeData = localeObject.getString(LOC_DATA);
@@ -271,7 +271,13 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
 
     private void showNotificationIfPossible (Context context, Bundle extras) {
 
-        // Send a notification if there is a message or title, otherwise just send data
+        Intent i = new Intent();
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setAction("areon.foo.bar.YOUR_ACTION");
+        i.putExtras(extras);
+        context.startActivity(i);
+
+         // Send a notification if there is a message or title, otherwise just send data
         String message = extras.getString(MESSAGE);
         String title = extras.getString(TITLE);
         String contentAvailable = extras.getString(CONTENT_AVAILABLE);
